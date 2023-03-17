@@ -1,10 +1,11 @@
+from algorithm.mutation.mutation import Mutation
 from algorithm.population import Population
 
 
-class Inversion:
+class TwoPoints(Mutation):
     def __init__(self, probability: float):
-        self.PROBABILITY = probability
+        super().__init__(probability)
 
     @staticmethod
     def evaluate(population: Population) -> Population:
-        pass
+        pass  # PERFORM MAGIC

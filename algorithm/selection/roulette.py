@@ -1,10 +1,8 @@
+from algorithm.selection.selection import Selection
 from algorithm.population import Population
 
 
-class Inversion:
-    def __init__(self, probability: float):
-        self.PROBABILITY = probability
-
+class Roulette(Selection):
     @staticmethod
     def evaluate(population: Population) -> Population:
-        pass
+        pass  # PERFORM MAGIC

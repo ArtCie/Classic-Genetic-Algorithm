@@ -28,7 +28,7 @@ class GeneticAlgorithmCalculator:
             # self.selection_method.evaluate(self.population)
             # self.cross_method.evaluate(self.population)
             self.mutation_method.evaluate(self.population_repository)
-            # self.inversion_method.evaluate(self.population)
+            self.inversion_method.evaluate(self.population_repository)
         # TODO
         # after each epoch -> evaluate results
         # print best value

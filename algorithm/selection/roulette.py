@@ -1,8 +1,8 @@
 from algorithm.selection.selection import Selection
-from algorithm.population import Population
+from algorithm.population_repository import PopulationRepository
 
 
 class Roulette(Selection):
     @staticmethod
-    def evaluate(population: Population) -> Population:
+    def evaluate(population: PopulationRepository) -> PopulationRepository:
         pass  # PERFORM MAGIC

@@ -1,4 +1,4 @@
-from algorithm.population import Population
+from algorithm.population_repository import PopulationRepository
 
 
 class Inversion:
@@ -6,5 +6,5 @@ class Inversion:
         self.PROBABILITY = probability
 
     @staticmethod
-    def evaluate(population: Population) -> Population:
+    def evaluate(population: PopulationRepository) -> PopulationRepository:
         pass

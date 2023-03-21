@@ -1,4 +1,8 @@
+import numpy as np
+
 from algorithm.population_repository import PopulationRepository
+from functions.eggholder_function_calculator import EggholderFunctionCalculator
+from functions.function_handler import FunctionHandler
 from algorithm.cross.cross import CrossTypes
 from algorithm.selection.selection import SelectionTypes
 from algorithm.inversion.inversion import Inversion
@@ -22,9 +26,14 @@ class GeneticAlgorithmCalculator:
         self.cross_method = CrossTypes.get_cross_by_type(cross_method, cross_probability)
         self.EPOCH_NUMBER = epoch_number
         self.elite_strategy_amount = elite_strategy_amount
+        self.function_handler = FunctionHandler(EggholderFunctionCalculator(), is_reversed=not is_max)
 
     def run(self):
         for epoch_number in range(self.EPOCH_NUMBER):
+            decoded_population = self.population_repository.decode_population()
+            function_values = list(map(self.function_handler.evaluate, decoded_population))
+            elite_squad = self._get_elite_squad(function_values)
+
             # self.selection_method.evaluate(self.population)
             # self.cross_method.evaluate(self.population)
             self.mutation_method.evaluate(self.population_repository)
@@ -34,3 +43,7 @@ class GeneticAlgorithmCalculator:
         # print best value
         # add class for graph
         # implement mutation/inversion/cross/selection -> each class should have probability field
+
+    def _get_elite_squad(self, function_values: list):
+        best_individuals = np.argsort(function_values)[:self.elite_strategy_amount]
+        return [self.population_repository.population[index] for index in best_individuals]

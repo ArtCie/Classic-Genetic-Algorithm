@@ -3,7 +3,7 @@ from algorithm.individual import Individual
 import numpy as np
 
 
-class Population:
+class PopulationRepository:
     def __init__(self, start_point: float, finish_point: float, precision: int, population_size: int):
         self.start_point = start_point
         self.finish_point = finish_point

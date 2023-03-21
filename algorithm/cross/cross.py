@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from algorithm.population import Population
+from algorithm.population_repository import PopulationRepository
 from enum import IntEnum
 
 
@@ -9,7 +9,7 @@ class Cross(ABC):
 
     @staticmethod
     @abstractmethod
-    def evaluate(population: Population) -> Population:
+    def evaluate(population: PopulationRepository) -> PopulationRepository:
         pass
 
 

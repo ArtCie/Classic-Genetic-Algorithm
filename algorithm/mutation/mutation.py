@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from algorithm.population import Population
+from algorithm.population_repository import PopulationRepository
 from enum import IntEnum
 
 
@@ -7,10 +7,13 @@ class Mutation(ABC):
     def __init__(self, probability: float):
         self.PROBABILITY = probability
 
-    @staticmethod
     @abstractmethod
-    def evaluate(population: Population) -> Population:
+    def evaluate(self, population: PopulationRepository) -> PopulationRepository:
         pass
+
+    @staticmethod
+    def _negate_value(current_value: int) -> int:
+        return int(current_value != 1)
 
 
 class MutationTypes(IntEnum):

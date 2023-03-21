@@ -6,6 +6,7 @@ class FunctionHandler:
         self.__function_calculator = function_calculator
         self.is_reversed = is_reversed
 
-    def evaluate(self, x1: float, x2: float) -> float:
+    def evaluate(self, x: list) -> float:
+        x1, x2 = x
         result = round(self.__function_calculator.evaluate(x1, x2), 4)
         return result if not self.is_reversed else - result

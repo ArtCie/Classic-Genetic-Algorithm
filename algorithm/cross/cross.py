@@ -7,9 +7,8 @@ class Cross(ABC):
     def __init__(self, probability: float):
         self.PROBABILITY = probability
 
-    @staticmethod
     @abstractmethod
-    def evaluate(population: PopulationRepository) -> PopulationRepository:
+    def evaluate(self, population_repository: PopulationRepository) -> None:
         pass
 
 

@@ -34,10 +34,10 @@ class GeneticAlgorithmCalculator:
             function_values = list(map(self.function_handler.evaluate, decoded_population))
             elite_squad = self._get_elite_squad(function_values)
 
-            # self.selection_method.evaluate(self.population)
-            # self.cross_method.evaluate(self.population)
-            self.mutation_method.evaluate(self.population_repository)
-            self.inversion_method.evaluate(self.population_repository)
+            # self.selection_method.evaluate(self.population_repository)
+            self.cross_method.evaluate(self.population_repository)
+            # self.mutation_method.evaluate(self.population_repository)
+            # self.inversion_method.evaluate(self.population_repository)
         # TODO
         # after each epoch -> evaluate results
         # print best value

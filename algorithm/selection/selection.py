@@ -4,9 +4,9 @@ from enum import IntEnum
 
 
 class Selection(ABC):
-    @staticmethod
+
     @abstractmethod
-    def evaluate(population: PopulationRepository) -> PopulationRepository:
+    def evaluate(self, population: PopulationRepository, function_values: list) -> None:
         pass
 
 

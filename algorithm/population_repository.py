@@ -18,13 +18,17 @@ class PopulationRepository:
         return int(np.ceil(np.log2((self.finish_point - self.start_point) * 10**self.precision + 1)))
 
     def _populate(self):
-        return [
+        return np.array([
             Individual(x1, x2) for x1, x2 in np.random.randint(2, size=(self.population_size, 2, self.chromosome_length))
-        ]
+        ])
 
     @property
-    def population(self) -> list:
+    def population(self) -> np.array:
         return self._population
+
+    @population.setter
+    def population(self, population):
+        self._population = population
 
     def decode_population(self):
         return np.array([self._decode_individual(individual) for individual in self.population])

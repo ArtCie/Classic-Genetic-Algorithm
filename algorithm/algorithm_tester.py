@@ -10,4 +10,4 @@ def run():
                                                               selection_method=1, cross_method=0, mutation_method=1,
                                                               is_max=1)
     genetic_algorithm_calculator.run()
-run()
+# run()

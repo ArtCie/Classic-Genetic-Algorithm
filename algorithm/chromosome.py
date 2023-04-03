@@ -5,8 +5,4 @@ class Chromosome:
     def __init__(self, value: np.array):
         self.value = value
 
-
-
-
-print("ostateczny test")
         

@@ -86,8 +86,8 @@ class InterfaceMain:
     def process_algorithm(self):
         try:
             genetic_algorithm_calculator = GeneticAlgorithmCalculator(
-                range_a=int(self.range_a.get()),
-                range_b=int(self.range_b.get()),
+                range_a=float(self.range_a.get()),
+                range_b=float(self.range_b.get()),
                 population_size=int(self.population_size.get()),
                 number_of_bits=int(self.number_of_bits.get()),
                 epoch_number=int(self.epochs_number.get()),

@@ -19,6 +19,7 @@ class Mutation(ABC):
 class MutationTypes(IntEnum):
     ONE_POINT = 0
     TWO_POINTS = 1
+    EDGE = 2
 
     @staticmethod
     def get_names():
@@ -29,5 +30,9 @@ class MutationTypes(IntEnum):
         if type == MutationTypes.ONE_POINT:
             from algorithm.mutation.one_point import OnePoint
             return OnePoint(probability)
-        from algorithm.mutation.two_points import TwoPoints
-        return TwoPoints(probability)
+        elif type == MutationTypes.TWO_POINTS:
+            from algorithm.mutation.two_points import TwoPoints
+            return TwoPoints(probability)
+        elif type == MutationTypes.EDGE:
+            from algorithm.mutation.edge import Edge
+            return Edge(probability)

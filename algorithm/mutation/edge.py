@@ -21,5 +21,5 @@ class Edge(Mutation):
     def _mutate_chromosome(self, chromosome: Chromosome):
         if np.random.choice([0, 1], p=[1 - self.PROBABILITY, self.PROBABILITY]):
             current_value = chromosome.value
-            index_to_update = np.random.choice([0,len(current_value)])
+            index_to_update = np.random.choice([0,len(current_value-1)])
             current_value[index_to_update] = self._negate_value(current_value[index_to_update])

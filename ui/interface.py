@@ -5,7 +5,7 @@ from algorithm.mutation.mutation import MutationTypes
 from algorithm.selection.selection import SelectionTypes
 from algorithm.inversion.inversion import Inversion
 from algorithm.genetic_algorithm_calculator import GeneticAlgorithmCalculator
-
+import time
 
 class InterfaceMain:
     def __init__(self):
@@ -82,6 +82,11 @@ class InterfaceMain:
         function_frame.place(x=425, y=470)
         Checkbutton(self.root, text='Is maximized?', variable=var).place(x=440, y=490)
         return var
+    
+    def display_time(self,time):
+        elapsed_time = time
+        time_label = Label(self.root, text=f"time needed: {elapsed_time:.2f} seconds")
+        time_label.place(x=50, y=600)
 
     def process_algorithm(self):
         try:
@@ -102,5 +107,7 @@ class InterfaceMain:
                 is_max=self.is_max.get()
             )
             result = genetic_algorithm_calculator.run()
+            time_needed = genetic_algorithm_calculator.elapsed_time
+            self.display_time(time_needed)
         except Exception as e:
             messagebox.showwarning("Error!", str(e))

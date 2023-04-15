@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 from copy import deepcopy
-
+import time
 
 from algorithm.population_repository import PopulationRepository
 from functions.eggholder_function_calculator import EggholderFunctionCalculator
@@ -27,8 +27,10 @@ class GeneticAlgorithmCalculator:
         self.elite_strategy_amount = elite_strategy_amount
         self.function_handler = FunctionHandler(EggholderFunctionCalculator(), is_reversed=not is_max)
         self.best = []
+        self.elapsed_time = 0
 
     def run(self):
+        start_time = time.time()
         for epoch_number in range(self.EPOCH_NUMBER):
             decoded_population = self.population_repository.decode_population()
             function_values = np.array(list(map(self.function_handler.evaluate, decoded_population)))
@@ -42,6 +44,10 @@ class GeneticAlgorithmCalculator:
             self.inversion_method.evaluate(self.population_repository)
 
             self._swap_elite_squad(elite_squad)
+        end_time = time.time()
+
+        self.elapsed_time = end_time - start_time
+        print("TIME NEEDED [s]: ",self.elapsed_time)
         self._draw_best()
         print(f"VALUE TO FIND -> -959.6407 YOUR VALUE {self.best[-1]}")
 
@@ -68,3 +74,7 @@ class GeneticAlgorithmCalculator:
     def _draw_best(self):
         plt.scatter([i for i in range(0, len(self.best))], self.best)
         plt.show()
+
+    @property
+    def get_time(self):
+        return self.elapsed_time

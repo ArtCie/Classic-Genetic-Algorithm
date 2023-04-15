@@ -7,7 +7,7 @@ def run():
                                                               best_and_tournament_chromosome_amount=10,
                                                               elite_strategy_amount=2, cross_probability=0.6,
                                                               mutation_probability=0.4, inversion_probability=0.1,
-                                                              selection_method=1, cross_method=0, mutation_method=1,
+                                                              selection_method=0, cross_method=0, mutation_method=1,
                                                               is_max=1)
     genetic_algorithm_calculator.run()
-# run()
+run()

@@ -41,7 +41,7 @@ class OnePoint(Cross):
             else:
                 new_pop.append(population[random_indexes[0]])
                 new_pop.append(population[random_indexes[1]])
-        population_repository.population = new_pop
+        population_repository.population = np.array(new_pop)
 
     @staticmethod
     def get_string_individual(individual):

@@ -113,8 +113,6 @@ class GeneticAlgorithmCalculator:
 
         with open('output.csv', 'w', newline='') as csvfile:
             csv_writer = csv.writer(csvfile)
-
-            csv_writer.writerow(["Elapsed Time",self.elapsed_time])
             # Write the timestamp in the first row
             csv_writer.writerow(["Elapsed Time",self.elapsed_time])
 

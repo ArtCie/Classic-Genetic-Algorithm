@@ -85,11 +85,15 @@ class GeneticAlgorithmCalculator:
     def _draw_best(self):
         plt.scatter([i for i in range(0, len(self.best))], self.best)
         plt.title("Plot - best value per epoch")
+        plt.xlabel("epoch")
+        plt.ylabel("value")
         plt.show()
 
     def _draw_avg(self):
         plt.scatter([i for i in range(0, len(self.avg))], self.avg)
         plt.title("Plot - average value per epoch")
+        plt.xlabel("epoch")
+        plt.ylabel("value")
         plt.show()
 
     def _draw_diff(self):
@@ -100,11 +104,15 @@ class GeneticAlgorithmCalculator:
         self.diff = diff_t
         plt.scatter([i for i in range(0, len(diff_t))], diff_t)
         plt.title("Plot - difference between bests in each epoch")
+        plt.xlabel("epoch")
+        plt.ylabel("value")
         plt.show()
 
     def _draw_std_dev(self):
         plt.scatter([i for i in range(0, len(self.std_dev))], self.std_dev)
         plt.title("Plot - standard devation value per epoch")
+        plt.xlabel("epoch")
+        plt.ylabel("value")
         plt.show()
 
     def _save_to_file(self):

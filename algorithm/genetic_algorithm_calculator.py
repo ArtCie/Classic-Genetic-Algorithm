@@ -29,12 +29,11 @@ class GeneticAlgorithmCalculator:
         self.best = []
 
     def run(self):
-        for epoch_number in range(1000):
+        for epoch_number in range(self.EPOCH_NUMBER):
             decoded_population = self.population_repository.decode_population()
             function_values = np.array(list(map(self.function_handler.evaluate, decoded_population)))
             
             # self._draw_values(decoded_population, function_values)
-            
             elite_squad = self._get_elite_squad(function_values)
 
             self.selection_method.evaluate(self.population_repository, function_values)

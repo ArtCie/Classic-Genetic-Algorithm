@@ -1,31 +1,29 @@
-from algorithm.cross.cross import Cross
+from algorithm.cross_binary.cross_binary import CrossBinary
 from algorithm.population_repository import PopulationRepository
 from algorithm.individual import Individual
 from algorithm.chromosome import Chromosome
 
 import numpy as np
 
-
-class OnePoint(Cross):
+class Homo(CrossBinary):
     def __init__(self, probability: float):
         super().__init__(probability)
 
-    def evaluate(self, population_repository: PopulationRepository) -> None:
+    def evaluate(self, population_repository : PopulationRepository) -> None:
+
         population = population_repository.population
         np.random.shuffle(population)
 
         new_pop = []
 
         while len(new_pop) < population_repository.population_size:
-            #for index, value in enumerate(range(len(population_repository.population) // 2)):
             random_indexes =  np.random.randint(0, len(population_repository.population), size=2)
             if np.random.choice([0, 1], p=[1 - self.PROBABILITY, self.PROBABILITY]):
-                cross_point = np.random.randint(population_repository.chromosome_length * 2)
                 merged_individual_1 = self.get_string_individual(population[random_indexes[0]])
                 merged_individual_2 = self.get_string_individual(population[random_indexes[1]])
 
-                new_individual_1 = merged_individual_1[:cross_point] + merged_individual_2[cross_point:]
-                new_individual_2 = merged_individual_2[:cross_point] + merged_individual_1[cross_point:]
+                new_individual_1 = ''.join([merged_individual_1[i] if i % 2 == 0 else merged_individual_2[i] for i in range(len(merged_individual_1))])
+                new_individual_2 = ''.join([merged_individual_2[i] if i % 2 == 0 else merged_individual_1[i] for i in range(len(merged_individual_2))])
 
 
                 chromosome_1 = np.array(list(new_individual_1[:population_repository.chromosome_length])).astype(int)

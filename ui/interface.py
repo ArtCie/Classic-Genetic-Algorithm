@@ -78,9 +78,9 @@ class InterfaceMain:
 
     def _generate_checkbutton(self):
         var = IntVar()
-        function_frame = LabelFrame(self.root, text="Maximization", width=340, height=60)
+        function_frame = LabelFrame(self.root, text="Minimanization", width=340, height=60)
         function_frame.place(x=425, y=470)
-        Checkbutton(self.root, text='Is maximized?', variable=var).place(x=440, y=490)
+        Checkbutton(self.root, text='Is minimized?', variable=var).place(x=440, y=490)
         return var
     
     def display_time(self,time):

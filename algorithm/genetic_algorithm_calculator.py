@@ -28,7 +28,7 @@ class GeneticAlgorithmCalculator:
         self.mutation_method = MutationTypes.get_mutation_by_type(mutation_method, mutation_probability, range_a, range_b)
         self.inversion_method = Inversion(inversion_probability)
         # self.cross_method = CrossTypes.get_cross_by_type(cross_method, cross_probability)
-        self.cross_method = CrossTypes.get_cross_by_type(cross_method, cross_probability, self.function_handler)
+        self.cross_method = CrossTypes.get_cross_by_type(cross_method, cross_probability, self.function_handler, range_a, range_b)
         self.EPOCH_NUMBER = epoch_number
         self.elite_strategy_amount = elite_strategy_amount
         self.best = []

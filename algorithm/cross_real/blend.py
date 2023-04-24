@@ -26,7 +26,7 @@ class Blend(CrossReal):
 
                 # OVERFLOW!!!!
 
-
+                
                 new_pop.append(Individual(p_prim * x1 + p * x2, p_prim * y1 + p * y2))
                 new_pop.append(Individual(p_prim * x2 + p * x1, p_prim * y2 + K * y1))
 

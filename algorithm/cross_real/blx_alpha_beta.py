@@ -8,6 +8,13 @@ import numpy as np
 class BlxAlphaBeta(CrossReal):
     def __init__(self, probability: float, range_a: float, range_b: float):
         super().__init__(probability, range_a, range_b)
+        
+    
+    def calculate_low(self,elem1,elem2,alpha,di):
+        return min(elem1, elem2) - alpha * di
+    
+    def calculate_high(self,elem1,elem2,beta,di):
+        return max(elem1, elem2) + beta * di
 
     def evaluate(self, population_repository: PopulationRepository) -> None:
 
@@ -22,14 +29,23 @@ class BlxAlphaBeta(CrossReal):
             x2, y2 = population[index_2].chromosome_1.value, population[index_2].chromosome_2.value
 
             if np.random.choice([0, 1], p=[1 - self.PROBABILITY, self.PROBABILITY]):
-                alpha, beta = np.random.random(), np.random.random()
+                alpha, beta = 0.0001, 0.0002
                 di_x = abs(x1 - x2)
                 di_y = abs(y1 - y2)
 
-                low_x, high_x = min(x1, x2) - alpha * di_x, max(x1, x2) + beta * di_x
-                low_y, high_y = min(y1, y2) - alpha * di_y, max(y1, y2) + beta * di_y
+                low_x = self.calculate_low(x1,x2,alpha,di_x)
+                high_x =  self.calculate_high(x1,x2,alpha,di_x)
+                low_y = self.calculate_low(y1,y2,alpha,di_y)
+                high_y = self.calculate_high(y1,y2,alpha,di_y)
 
-                # OVERFLOW!!!
+                while low_x > self.range_b or low_x < self.range_a:
+                    low_x = self.calculate_low(x1,x2,alpha,di_x)
+                while high_x > self.range_b or high_x < self.range_a:
+                    high_x =  self.calculate_high(x1,x2,beta,di_x)
+                while low_y > self.range_b or low_y < self.range_a:
+                    low_y = self.calculate_low(y1,y2,alpha,di_y)
+                while high_y > self.range_b or high_y < self.range_a:
+                     high_y = self.calculate_high(y1,y2,beta,di_y)
 
                 new_pop.append(Individual(np.random.uniform(low=low_x, high=high_x), np.random.uniform(low=low_y, high=high_y)))
                 new_pop.append(Individual(np.random.uniform(low=low_x, high=high_x), np.random.uniform(low=low_y, high=high_y)))

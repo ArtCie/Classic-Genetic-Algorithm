@@ -1,7 +1,9 @@
 from tkinter import *
 from tkinter import ttk, messagebox
 from algorithm.cross_binary.cross_binary import CrossTypes
+from algorithm.cross_real.cross_real import CrossTypes
 from algorithm.mutation.mutation import MutationTypes
+from algorithm.mutation_real.mutation_real import MutationTypes
 from algorithm.selection.selection import SelectionTypes
 from algorithm.inversion.inversion import Inversion
 from algorithm.genetic_algorithm_calculator import GeneticAlgorithmCalculator

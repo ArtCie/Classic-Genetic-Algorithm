@@ -37,6 +37,9 @@ class Linear(CrossReal):
 
                 sorted_temp_values = [x for _, x in sorted(zip(evals, temp_values), key=lambda pair: pair[0])]
 
+                if sorted_temp_values[0][0] < self.range_a or sorted_temp_values[0][0] > self.range_b or sorted_temp_values[0][1] < self.range_a or sorted_temp_values[0][1] > self.range_b or sorted_temp_values[1][0] < self.range_a or sorted_temp_values[1][0] > self.range_b or sorted_temp_values[1][1] < self.range_a or sorted_temp_values[1][1] > self.range_b:
+                    continue
+
                 new_pop.append(Individual(sorted_temp_values[0][0], sorted_temp_values[0][1]))
                 new_pop.append(Individual(sorted_temp_values[1][0], sorted_temp_values[1][1]))
             else:

@@ -21,13 +21,14 @@ def individual(icls):
     return icls(genome)
 
 
+#jeśli chcemy odbić funkcje * -1 _ normlanie * 1
 def evaluate(x1: float, x2: float) -> float:
-    return -(x2 + 47) * sin(sqrt(abs(x2 + x1 / 2 + 47))) - x1 * sin(sqrt(abs(x1 - (x2 + 47))))
+    return (-(x2 + 47) * sin(sqrt(abs(x2 + x1 / 2 + 47))) - x1 * sin(sqrt(abs(x1 - (x2 + 47))))) * (-1)
 
 def fitnessFunction(individual):
     return evaluate(individual[0], individual[1]),
 
-
+#maksymalizacja +1.0, minimalizacja -1.0
 creator.create("FitnessMin", base.Fitness, weights=(-1.0,))
 creator.create("Individual", list, fitness=creator.FitnessMin)
 toolbox = base.Toolbox()
@@ -43,6 +44,7 @@ sizePopulation = 100
 probabilityMutation = 0.2
 probabilityCrossover = 0.8
 numberIteration = 100
+numberSelection = 30
 
 pop = toolbox.population(n=sizePopulation)
 fitnesses = list(map(toolbox.evaluate, pop))
@@ -59,11 +61,14 @@ numberElitism = 1
 while g < numberIteration:
     g = g + 1
     print("-- Generation %i --" % g)
-    offspring = toolbox.select(pop, len(pop))
+    offspring = toolbox.select(pop, numberSelection)
     offspring = list(map(toolbox.clone, offspring))
+    offspring = random.choices(offspring, k=sizePopulation)
     listElitism = []
     for x in range(0, numberElitism):
-        listElitism.append(tools.selBest(pop, 1)[0])
+        #jesli maksymalizacja musi być selWorst, minimalizacja selBest
+        #listElitism.append(tools.selBest(pop, 1)[0])
+        listElitism.append(tools.selWorst(pop, 1)[0])
     for child1, child2 in zip(offspring[::2], offspring[1::2]):
         if random.random() < probabilityCrossover:
             toolbox.mate(child1, child2)
@@ -80,7 +85,8 @@ while g < numberIteration:
     for ind, fit in zip(invalid_ind, fitnesses):
         ind.fitness.values = fit
     print(" Evaluated %i individuals" % len(invalid_ind))
-    pop[:] = offspring + listElitism
+    pop[:] = offspring
+    pop[:numberElitism] = listElitism
 
     fits = [ind.fitness.values[0] for ind in pop]
     length = len(pop)

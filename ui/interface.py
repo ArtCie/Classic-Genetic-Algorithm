@@ -1,7 +1,9 @@
 from tkinter import *
 from tkinter import ttk, messagebox
-from algorithm.cross.cross import CrossTypes
+from algorithm.cross_binary.cross_binary import CrossTypes
+from algorithm.cross_real.cross_real import CrossTypes
 from algorithm.mutation.mutation import MutationTypes
+from algorithm.mutation_real.mutation_real import MutationTypes
 from algorithm.selection.selection import SelectionTypes
 from algorithm.inversion.inversion import Inversion
 from algorithm.genetic_algorithm_calculator import GeneticAlgorithmCalculator
@@ -59,7 +61,7 @@ class InterfaceMain:
                                                         label_y=400,
                                                         values=SelectionTypes.get_names())
 
-        self.cross_method = self._generate_combobox(label_text="Choose cross method", label_x=425,
+        self.cross_method = self._generate_combobox(label_text="Choose cross_binary method", label_x=425,
                                                     label_y=400,
                                                     values=CrossTypes.get_names())
 

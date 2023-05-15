@@ -8,9 +8,11 @@ from algorithm.population_repository import PopulationRepository
 from functions.eggholder_function_calculator import EggholderFunctionCalculator
 from functions.function_handler import FunctionHandler
 
-from algorithm.cross.cross import CrossTypes
+# from algorithm.cross_binary.cross_binary import CrossTypes
+from algorithm.cross_real.cross_real import CrossTypes
 from algorithm.selection.selection import SelectionTypes
 from algorithm.mutation.mutation import MutationTypes
+from algorithm.mutation_real.mutation_real import MutationTypes
 from algorithm.inversion.inversion import Inversion
 
 
@@ -19,14 +21,16 @@ class GeneticAlgorithmCalculator:
                  best_and_tournament_chromosome_amount: int, elite_strategy_amount: int,
                  cross_probability: float, mutation_probability: float, inversion_probability: float,
                  selection_method: int, cross_method: int, mutation_method: int, is_max: int):
+        self.function_handler = FunctionHandler(EggholderFunctionCalculator(), is_reversed=not is_max)
         self.population_repository = PopulationRepository(range_a, range_b, number_of_bits, population_size)
         self.selection_method = SelectionTypes.get_selection_by_type(selection_method, best_and_tournament_chromosome_amount)
-        self.mutation_method = MutationTypes.get_mutation_by_type(mutation_method, mutation_probability)
+        # self.mutation_method = MutationTypes.get_mutation_by_type(mutation_method, mutation_probability)
+        self.mutation_method = MutationTypes.get_mutation_by_type(mutation_method, mutation_probability, range_a, range_b)
         self.inversion_method = Inversion(inversion_probability)
-        self.cross_method = CrossTypes.get_cross_by_type(cross_method, cross_probability)
+        # self.cross_method = CrossTypes.get_cross_by_type(cross_method, cross_probability)
+        self.cross_method = CrossTypes.get_cross_by_type(cross_method, cross_probability, self.function_handler, range_a, range_b)
         self.EPOCH_NUMBER = epoch_number
         self.elite_strategy_amount = elite_strategy_amount
-        self.function_handler = FunctionHandler(EggholderFunctionCalculator(), is_reversed=not is_max)
         self.best = []
         self.avg = []
         self.diff = []
@@ -46,7 +50,7 @@ class GeneticAlgorithmCalculator:
             self.selection_method.evaluate(self.population_repository, function_values)
             self.cross_method.evaluate(self.population_repository)
             self.mutation_method.evaluate(self.population_repository)
-            self.inversion_method.evaluate(self.population_repository)
+            # self.inversion_method.evaluate(self.population_repository)
 
             self._swap_elite_squad(elite_squad)
         end_time = time.time()

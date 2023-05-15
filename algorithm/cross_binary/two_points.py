@@ -1,4 +1,4 @@
-from algorithm.cross.cross import Cross
+from algorithm.cross_binary.cross_binary import CrossBinary
 from algorithm.population_repository import PopulationRepository
 from algorithm.individual import Individual
 from algorithm.chromosome import Chromosome
@@ -6,7 +6,7 @@ from algorithm.chromosome import Chromosome
 import numpy as np
 
 
-class TwoPoints(Cross):
+class TwoPoints(CrossBinary):
     def __init__(self, probability: float):
         super().__init__(probability)
 

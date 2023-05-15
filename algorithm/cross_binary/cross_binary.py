@@ -3,7 +3,7 @@ from algorithm.population_repository import PopulationRepository
 from enum import IntEnum
 
 
-class Cross(ABC):
+class CrossBinary(ABC):
     def __init__(self, probability: float):
         self.PROBABILITY = probability
 
@@ -25,13 +25,13 @@ class CrossTypes(IntEnum):
     @staticmethod
     def get_cross_by_type(type, probability):
         if type == CrossTypes.ONE_POINT:
-            from algorithm.cross.one_point import OnePoint
+            from algorithm.cross_binary.one_point import OnePoint
             return OnePoint(probability)
         if type == CrossTypes.TWO_POINTS:
-            from algorithm.cross.two_points import TwoPoints
+            from algorithm.cross_binary.two_points import TwoPoints
             return TwoPoints(probability)
         if type == CrossTypes.THREE_POINTS:
-            from algorithm.cross.three_points import ThreePoints
+            from algorithm.cross_binary.three_points import ThreePoints
             return ThreePoints(probability)
-        from algorithm.cross.homo import Homo
+        from algorithm.cross_binary.homo import Homo
         return Homo(probability)

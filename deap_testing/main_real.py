@@ -105,7 +105,7 @@ end_time = time.time()
 execution_time = end_time - start_time
 print("-- End of (successful) evolution --")
 print("Execution time:", execution_time, "seconds")
-
+print("MINNN",sorted(results_min)[0])
 x_range = [i for i in range(numberIteration)]
 plot(x_range, results_min, title="Minimum plot")
 plot(x_range, results_std, title="Std plot")

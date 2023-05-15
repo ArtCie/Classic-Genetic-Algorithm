@@ -58,24 +58,24 @@ toolbox.register('evaluate', fitnessFunction)
 
 #toolbox.register('select', tools.selTournament, tournsize=3)
 # switch selection method here
-toolbox.register('select', tools.selRoulette)
-#toolbox.register('select', tools.selBest)
+#toolbox.register('select', tools.selRoulette)
+toolbox.register('select', tools.selBest)
 #toolbox.register('select', tools.selNSGA2)
 
 # switch crossover method here
-toolbox.register('mate', tools.cxOnePoint)
-# toolbox.register('mate', tools.cxTwoPoint)
-# toolbox.register('mate', tools.cxOrdered)
-# toolbox.register('mate', tools.cxPartialyMatched)
+#toolbox.register('mate', tools.cxOnePoint)
+#toolbox.register('mate', tools.cxTwoPoint)
+toolbox.register('mate', tools.cxOrdered)
+#toolbox.register('mate', tools.cxPartialyMatched)
 
 # switch mutation method here
 toolbox.register('mutate', tools.mutShuffleIndexes)
-# toolbox.register('mutate', tools.mutFlipBit)
+#toolbox.register('mutate', tools.mutFlipBit)
 
 sizePopulation = 100
-probabilityMutation = 0.5
-probabilityCrossover = 0.5
-numberIteration = 100
+probabilityMutation = 0.2
+probabilityCrossover = 0.2
+numberIteration = 400
 numberSelection = 30
 
 pop = toolbox.population(n=sizePopulation)
@@ -135,7 +135,7 @@ end_time = time.time()
 execution_time = end_time - start_time
 print("-- End of (successful) evolution --")
 print("Execution time:", execution_time, "seconds")
-
+print("MINNN",sorted(results_min)[0])
 x_range = [i for i in range(numberIteration)]
 plot(x_range, results_min, title="Minimum plot")
 plot(x_range, results_std, title="Std plot")

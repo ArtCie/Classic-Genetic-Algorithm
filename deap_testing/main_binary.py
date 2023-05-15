@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 from random import randint
 import random
 from math import sqrt, sin
-
+import time
 import numpy as np
 from deap import base
 from deap import creator
@@ -89,6 +89,7 @@ results_std = []
 
 g = 0
 numberElitism = 1
+start_time = time.time()
 while g < numberIteration:
     g = g + 1
     print("-- Generation %i --" % g)
@@ -130,7 +131,10 @@ while g < numberIteration:
     best_ind = tools.selBest(pop, 1)[0]
     print("Best individual is %s, %s" % (_decode_individual(best_ind),
                                          best_ind.fitness.values))
+end_time = time.time()
+execution_time = end_time - start_time
 print("-- End of (successful) evolution --")
+print("Execution time:", execution_time, "seconds")
 
 x_range = [i for i in range(numberIteration)]
 plot(x_range, results_min, title="Minimum plot")

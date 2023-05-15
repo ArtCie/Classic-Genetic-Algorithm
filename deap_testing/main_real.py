@@ -4,6 +4,7 @@ from math import sqrt, sin
 from deap import base
 from deap import creator
 from deap import tools
+import time
 
 
 def plot(x_data, y_data, title=""):
@@ -23,7 +24,7 @@ def individual(icls):
 
 #jeśli chcemy odbić funkcje * -1 _ normlanie * 1
 def evaluate(x1: float, x2: float) -> float:
-    return (-(x2 + 47) * sin(sqrt(abs(x2 + x1 / 2 + 47))) - x1 * sin(sqrt(abs(x1 - (x2 + 47))))) * (-1)
+    return (-(x2 + 47) * sin(sqrt(abs(x2 + x1 / 2 + 47))) - x1 * sin(sqrt(abs(x1 - (x2 + 47))))) * (1)
 
 def fitnessFunction(individual):
     return evaluate(individual[0], individual[1]),
@@ -41,8 +42,8 @@ toolbox.register('mate', tools.cxBlend, alpha=0.01)
 toolbox.register("mutate", tools.mutGaussian, mu = 5, sigma= 10)
 
 sizePopulation = 100
-probabilityMutation = 0.2
-probabilityCrossover = 0.8
+probabilityMutation = 0.5
+probabilityCrossover = 0.5
 numberIteration = 100
 numberSelection = 30
 
@@ -58,6 +59,7 @@ results_mean = []
 results_std = []
 
 numberElitism = 1
+start_time = time.time()
 while g < numberIteration:
     g = g + 1
     print("-- Generation %i --" % g)
@@ -67,8 +69,8 @@ while g < numberIteration:
     listElitism = []
     for x in range(0, numberElitism):
         #jesli maksymalizacja musi być selWorst, minimalizacja selBest
-        #listElitism.append(tools.selBest(pop, 1)[0])
-        listElitism.append(tools.selWorst(pop, 1)[0])
+        listElitism.append(tools.selBest(pop, 1)[0])
+        #listElitism.append(tools.selWorst(pop, 1)[0])
     for child1, child2 in zip(offspring[::2], offspring[1::2]):
         if random.random() < probabilityCrossover:
             toolbox.mate(child1, child2)
@@ -99,7 +101,10 @@ while g < numberIteration:
     best_ind = tools.selBest(pop, 1)[0]
     print("Best individual is %s, %s" % (best_ind,
                                          best_ind.fitness.values))
+end_time = time.time()
+execution_time = end_time - start_time
 print("-- End of (successful) evolution --")
+print("Execution time:", execution_time, "seconds")
 
 x_range = [i for i in range(numberIteration)]
 plot(x_range, results_min, title="Minimum plot")
